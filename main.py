@@ -48,7 +48,7 @@ def get_weather(region):
     # 天气帅达版
     weather = response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_d"]+'转'+response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_n"]
     # 当前温度
-    temp = response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"]+ u"\N{DEGREE SIGN}" + "C"+'至'+['HeWeather6'][0]["daily_forecast"][0]["tmp_max"]+ u"\N{DEGREE SIGN}" + "C"
+    temp = response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"]+ u"\N{DEGREE SIGN}" + "C"+'至'+response['HeWeather6'][0]["daily_forecast"][0]["tmp_max"]+ u"\N{DEGREE SIGN}" + "C"
     # 风向
     wind_dir = response['HeWeather6'][0]["daily_forecast"][0]["wind_dir"]
     return weather, temp, wind_dir
