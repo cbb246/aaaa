@@ -49,9 +49,13 @@ def get_weather(region):
     weather = response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_d"]+'转'+response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_n"]
     # 当前温度
     temp = response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"]+ u"\N{DEGREE SIGN}" + "C"+'至'+response['HeWeather6'][0]["daily_forecast"][0]["tmp_max"]+ u"\N{DEGREE SIGN}" + "C"
+    if response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"] < 20:
+        xigua = "天气变凉啦，多穿点衣服哦~"
+    else:
+        xigua = "今天又是很想你的一天~"
     # 风向
     wind_dir = response['HeWeather6'][0]["daily_forecast"][0]["wind_dir"]
-    return weather, temp, wind_dir
+    return weather, temp, wind_dir, xigua
  
  
 def get_birthday(birthday, year, today):
@@ -165,6 +169,10 @@ def send_message(to_user, access_token, region_name, weather, temp, wind_dir, no
             "note_ch": {
                 "value": note_ch,
                 "color": get_color()
+            },
+            "xigua":{
+                "value": xigua,
+                "color": get_color()
             }
         }
     }
@@ -222,5 +230,5 @@ if __name__ == "__main__":
         note_ch, note_en = get_ciba()
     # 公众号推送消息
     for user in users:
-        send_message(user, accessToken, region, weather, temp, wind_dir, note_ch, note_en)
+        send_message(user, accessToken, region, weather, temp, wind_dir, note_ch, note_en,xigua)
     os.system("pause")
