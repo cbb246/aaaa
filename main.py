@@ -46,9 +46,9 @@ def get_weather(region):
     weather_url = "https://free-api.heweather.com/s6/weather/forecast?location={}&key={}".format(location_id, key)
     response = get(weather_url, headers=headers).json()
     # 天气帅达版
-    weather = response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_d"]+'转'+response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_n"]
+    weather = '白天'+response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_d"]+'，'+'傍晚'+response['HeWeather6'][0]["daily_forecast"][0]["cond_txt_n"]
     # 当前温度
-    temp = response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"]+ u"\N{DEGREE SIGN}" + "C"+'至'+response['HeWeather6'][0]["daily_forecast"][0]["tmp_max"]+ u"\N{DEGREE SIGN}" + "C"
+    temp = response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"]+ u"\N{DEGREE SIGN}" + "C"+'—'+response['HeWeather6'][0]["daily_forecast"][0]["tmp_max"]+ u"\N{DEGREE SIGN}" + "C"
     if int(response['HeWeather6'][0]["daily_forecast"][0]["tmp_min"]) < 20:
         xigua = "天气变凉啦，多穿点衣服哦~"
     else:
